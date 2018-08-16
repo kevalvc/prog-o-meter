@@ -47,6 +47,7 @@ class ProgressGUI(object):
         """
         # Attributes
         self.root = Tk.Tk()
+        self.root.title("Progress")
         self.user = user
         self.username = user.get_name()
         (self.days, self.GOAL) = user.get_progress()
@@ -61,7 +62,10 @@ class ProgressGUI(object):
         self.button_layout()
         self.prog_o_meter()
         self.progress()
+        self.root.protocol("WM_DELETE_WINDOW",lambda: quit())
         self.root.mainloop()
+
+
     def canvas_layout(self):
         """Display a Tkinter canvas.
 
@@ -112,7 +116,7 @@ class ProgressGUI(object):
         RIGHT_BOUNDARY = 50
         RECTANGLE_HEIGHT = 20
         RECTANGLE_WIDENESS = (self.CANVAS_WIDTH-(LEFT_BOUNDARY+RIGHT_BOUNDARY))/self.GOAL
-        for i in range(self.GOAL):        # Create a rectangle for each day and add it to the rectangle_list
+        for _ in range(self.GOAL):        # Create a rectangle for each day and add it to the rectangle_list
             rectangle = self.canvas.create_rectangle(LEFT_BOUNDARY, self.CANVAS_HEIGHT/2, LEFT_BOUNDARY+RECTANGLE_WIDENESS, (self.CANVAS_HEIGHT/2)+RECTANGLE_HEIGHT, fill = "white")
             self.rectangle_list.append(rectangle)
             LEFT_BOUNDARY += RECTANGLE_WIDENESS
@@ -230,10 +234,12 @@ class StartGUI(object):
         """
         # Attributes
         self.root = Tk.Tk()
+        self.root.title("Welcome!")
         self.choice = Tk.IntVar()
         # Tkinter instantiation
         self.canvas_layout()
         self.input_buttons()
+        self.root.protocol("WM_DELETE_WINDOW", lambda: quit())
         self.root.mainloop()
 
     def canvas_layout(self):
@@ -297,11 +303,13 @@ class UsernameGUI(object):
         """
         # Attributes
         self.root = Tk.Tk()
+        self.root.title("Login")
         self.username = ""
         self.user_type = _user_type
         # Tkinter instantiation
         self.canvas_layout()
         self.input_button()
+        self.root.protocol("WM_DELETE_WINDOW", lambda: quit())
         self.root.mainloop()
     def canvas_layout(self):
         """Display a Tkinter canvas.
